@@ -6,6 +6,8 @@ import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { FcGoogle } from 'react-icons/fc';
 import { useRouter } from 'next/navigation';
 
+// Define the base URL for the API
+// This should be the URL of your user microservice
 const API_BASE_URL = 'https://user-microservice1.onrender.com';
 export const dynamic = 'force-dynamic';
 export default function Login() {
@@ -18,6 +20,7 @@ export default function Login() {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
+  // Function to store authentication data in local storage
   const storeAuthData = (token, userId) => {
     if (typeof window !== 'undefined') {
       localStorage.setItem('authToken', token);
@@ -25,13 +28,13 @@ export default function Login() {
       localStorage.setItem('userId', userId);
     }
   };
-
+  // Function to handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
     setError('');
   };
-
+  // Function to handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);

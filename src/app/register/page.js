@@ -6,6 +6,8 @@ import { FcGoogle } from "react-icons/fc";
 import { useRouter } from "next/navigation";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 
+// Define the base URL for the API
+// This should be the URL of your user microservice
 const API_BASE_URL = "https://user-microservice1.onrender.com";
 const AUTH_ENDPOINTS = {
   register: "/auth/register",
@@ -35,6 +37,7 @@ export default function Register() {
   const [isLoading, setIsLoading] = useState(false);
   const [registrationSuccess, setRegistrationSuccess] = useState(false);
 
+  // Function to make API calls
   const makeApiCall = async (endpoint, data) => {
     const url = `${API_BASE_URL}${endpoint}`;
     console.log(`Making API call to: ${url}`, { data });
@@ -88,6 +91,8 @@ export default function Register() {
    // }
   //};
 
+  // Function to validate password
+  // This function checks if the password meets the criteria
   const validatePassword = (password) => {
     const hasMinLength = password.length >= 8;
     const hasLetter = /[a-zA-Z]/.test(password);
@@ -95,6 +100,7 @@ export default function Register() {
     return hasMinLength && hasLetter && hasNumber;
   };
 
+  // Function to handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({...prev, [name]: value}));
@@ -104,6 +110,7 @@ export default function Register() {
     }
   };
 
+  // Function to handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -166,6 +173,7 @@ export default function Register() {
     }
   };
 
+  // Function to check if email exists
   useEffect(() => {
     if (formData.email) {
       const timer = setTimeout(() => {
